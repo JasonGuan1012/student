@@ -1,13 +1,18 @@
 ---
 layout: default
-title: Student Blog
+title: Jason G.'s Blog
 ---
 
 
 ## Build you Home Page here 
 This is about your journey. Start now!!!
 
+Freeform Image About Me:
+
+<img src="images/IMG_3912.PNG" alt="Freeform image">
+
 ## Overview of Hacks, Study and Tangibles
+
 Blogging in GitHub pages is a way to learn and code at the same time. 
 
 - Plans, Lists, [Scrum Boards](https://clickup.com/blog/scrum-board/) help you to track key events, show progress and record time.  Effort is a big part of your class grade.  Show plans and time spent!
