@@ -11,6 +11,7 @@ Freeform Image About Me:
 <img src="images/IMG_3912.PNG" alt="Freeform image">
 
 ## About ME
+![AboutMe](images/FreeFormImage.PNG)
 Some of my freinds and teachers know that I moved here from another country to US in the summer of 2019 and started 6th in Oak Valley. So this is my 4th year after moving from my country.
 
 

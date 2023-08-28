@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Build a Project
-description: This the page for the assignment "Build a Project". 
-This page added the Calculator with the language in JavaScript.
+description: This the page for the assignment "Build a Project". This page added the Calculator with the language in JavaScript.
+--- 
 
 <body>
     <h1>Calculator</h1>
