@@ -17,6 +17,8 @@ courses: {'compsci': {'week': 1}}
     -Added a calculator with the language JavaScript.
  
  
+
+ 
  ## Week 2
 
 
