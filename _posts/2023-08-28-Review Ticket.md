@@ -3,13 +3,13 @@ toc: True
 comments: True
 layout: post
 title: Review Ticket
-description: The review ticket from past few weeks.
+description: The review tickets over the past few weeks.
 type: tangibles
 courses: {'compsci': {'week': 1}}
 ---
 
 
-### Plan for week 1
+### Achievement from week 1
 > Changes for the blog.
   - Discussed about cloud machines and opening VScode Successfully.
   - Pair tool check.
@@ -17,14 +17,16 @@ courses: {'compsci': {'week': 1}}
   - Adding the Freeform Image on student blog.
   - School schedule on the home page of student blog.
   - Creating a new page for "Build a Project".
-    - Added a calculator with the language JavaScript.
-  - 
+   - Added a calculator with the language JavaScript.
   
- 
- 
-### Week 2
+
+
+
+### Achievement from week 2
 > Changes for the blog.
- - Type.
+  - Adding the Classic Snake Game
+  - Changing the theme again to another theme that wasn't provided in the file.
+  - 
 
 
 
