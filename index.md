@@ -3,25 +3,27 @@ layout: default
 title: Jason G.'s Blog
 ---
 
-## Build you Home Page here 
-This is about your journey. Start now!!!
+
 
 ## About ME
-Freeform Image About Me:
-![AboutMe](images/FreeFormImage.PNG)
-Some of my freinds and teachers know that I moved here from another country to US in the summer of 2019 and started 6th in Oak Valley. So this is my 4th year after moving from my country.
+ - Freeform Image About Me:
+ ![AboutMe](images/FreeFormImage.PNG)
+
+ - Some of my freinds and teachers know that I moved here from another country to US in the summer of 2019 and started 6th in Oak Valley. So this is my 4th year after moving from my country.
 
 
-## Schedule
-Period 1: High School English 3
 
-Period 2: AP World History
 
-Period 3: Integrated Math 2b
+> ## Schedule
+>> Period 1: High School English 3
 
-Period 4: AP Chinese
+>> Period 2: AP World History
 
-Period 5: AP Computer Science P.
+>> Period 3: Integrated Math 2b
+
+>> Period 4: AP Chinese
+
+>> Period 5: AP Computer Science P.
 
 
 
