@@ -9,7 +9,7 @@ courses: {'compsci': {'week': 1}}
 ---
 
 
-### Achievement from week 1
+### Achievements from week 1
 > Changes for the blog.
   - Discussed about cloud machines and opening VScode Successfully.
   - Pair tool check.

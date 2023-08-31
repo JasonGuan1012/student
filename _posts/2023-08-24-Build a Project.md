@@ -2,6 +2,8 @@
 layout: post
 title: Build a Project
 description: This the page for the assignment "Build a Project". This page added the Calculator with the language in JavaScript.
+type: hacks
+courses: {'compsci': {'week': 2}}
 --- 
 
 <body>
