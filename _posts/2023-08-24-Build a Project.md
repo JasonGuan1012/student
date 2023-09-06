@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Build a Project
+title: JS Calculator
 description: This the page for the assignment "Build a Project". This page added the Calculator with the language in JavaScript.
 type: hacks
 courses: {'compsci': {'week': 2}}
@@ -29,16 +29,13 @@ courses: {'compsci': {'week': 2}}
     <button onclick="clearResult()">C</button>
     <button onclick="calculateResult()">=</button>
     <button onclick="appendToResult('/')">/</button>
-
     <script>
         function appendToResult(value) {
             document.getElementById('result').value += value;
         }
-
         function clearResult() {
             document.getElementById('result').value = '';
         }
-
         function calculateResult() {
             try {
                 const expression = document.getElementById('result').value;
