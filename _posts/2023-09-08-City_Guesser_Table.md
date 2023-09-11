@@ -15,7 +15,7 @@ type: hacks
 
 
 <!-- Body contains the contents of the Document -->
-<body>
+<body> 
     <table id="demo" class="table">
         <thead>
             <tr>
@@ -1252,3 +1252,5 @@ type: hacks
 <script>
     $("#demo").DataTable();
 </script>
+
+<!-- The sript to generate the html of cities from ChatGPT, having some bugs, and me and Ian had to debug the provided code-->
