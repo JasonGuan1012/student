@@ -5,7 +5,7 @@ layout: post
 title: Web Test - Review Ticket
 description: Sums up the achievements and mistakes during the preperation for Web Test.
 type: tangibles
-courses: {compsci: {week: 6}}
+courses: {'compsci': {week: 6}}
 ---
 
 

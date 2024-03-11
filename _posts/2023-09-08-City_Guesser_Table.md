@@ -2,7 +2,7 @@
 title: City Guesser Info
 layout: post
 description: Data about all the cities in City Guesser.
-courses: {compsci: {week: 3}}
+courses: {'compsci': {week: 3}}
 type: hacks
 ---
 <head>
