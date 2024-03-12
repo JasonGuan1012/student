@@ -9,21 +9,21 @@ title: Jason G.'s Blog
  - Freeform Image About Me:
  ![AboutMe](images/FreeFormImage.PNG)
 
- - Some of my freinds and teachers know that I moved here from another country to US in the summer of 2019 and started 6th in Oak Valley. So this is my 4th year after moving from my country.
+ - Some of my freinds and teachers know that I moved here from another country to US in the summer of 2019 and started school 6th in Oak Valley. So this is my 4th year after moving from my country.
 
 
 
 
 > ## Schedule
->> Period 1: High School English 3
+>> Period 1: Integrated Math 3b
 
->> Period 2: AP World History
+>> Period 2: Pre-Calculus 1
 
->> Period 3: Integrated Math 2b
+>> Period 3: Data Structure 1
 
->> Period 4: AP Chinese
+>> Period 4: AP Chinese Seminar
 
->> Period 5: AP Computer Science P.
+>> Period 5: World Geography and Cultures
 
 
 
