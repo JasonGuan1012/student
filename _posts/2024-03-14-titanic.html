@@ -128,7 +128,7 @@
         function predictSurvival() {
             var form = document.getElementById('titanicForm');
             var formData = new FormData(form);
-            fetch('http://localhost:8084/api/titanic/predict', {
+            fetch('http://localhost:8086/api/titanic/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
