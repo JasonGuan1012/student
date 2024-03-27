@@ -227,16 +227,49 @@ button:hover .icon-5 {
 .fil-leaf-5 {
   fill: #3C4819
 }
-      #resultContainer {
+      @keyframes breathing {
+      0% {
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 20px 5px rgba(112, 128, 144, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5);
+      }
+    }
+      #resultContainer { /* the box for the result when the variety is detected...*/
       background-color: #222222; 
       border: 2px solid #141414; 
       border-radius: 32px;
       padding: 20px;
       margin-top: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       font-size: 24px;
       text-align: center;
+      animation: breathing 3s infinite alternate;
+      position: relative;
       }
+      #resultContainer::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 36px;
+      animation: pulsate 3s infinite;
+    }
+    @keyframes pulsate {
+      0% {
+        transform: scale(0.9);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(0.9);
+      }
+    }
     #imageContainer {
       margin-top: 20px;
       text-align: center;
@@ -283,6 +316,10 @@ button:hover .icon-5 {
 <br>
 
 <div id="imageContainer"></div>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
