@@ -273,6 +273,7 @@ button:hover .icon-5 {
   <label for="petal_width">Petal Width:</label>
   <input type="number" id="petal_width" step="0.1" placeholder="Enter Petal Width">
 </div>
+<br>
 <div>
   <button onclick="predictIris()">Submit</button>
 </div>
