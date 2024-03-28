@@ -290,23 +290,30 @@ button:hover .icon-5 {
 
 
 
-<div>
+<div class="custom-input">
   <label for="sepal_length">Sepal Length:</label>
   <input type="number" id="sepal_length" step="0.1" placeholder="Enter Sepal Length">
 </div>
-<div>
+<br>
+
+<div class="custom-input">
   <label for="sepal_width">Sepal Width:</label>
   <input type="number" id="sepal_width" step="0.1" placeholder="Enter Sepal Width">
 </div>
-<div>
+<br>
+
+<div class="custom-input">
   <label for="petal_length">Petal Length:</label>
   <input type="number" id="petal_length" step="0.1" placeholder="Enter Petal Length">
 </div>
-<div>
+<br>
+
+<div class="custom-input">
   <label for="petal_width">Petal Width:</label>
   <input type="number" id="petal_width" step="0.1" placeholder="Enter Petal Width">
 </div>
 <br>
+
 <div>
   <button onclick="predictIris()">Submit</button>
 </div>
