@@ -33,7 +33,7 @@ image: images/erfef.webp
   left: 50%;
   transform: translate(-50%, 0);
   width: 0px;
-  height: auto;
+  height: auto;3
   transition: all .5s ease-in-out;
   z-index: -1;
 }

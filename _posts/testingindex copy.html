@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Game Universe</title>
+    <div id="snow"></div>
+    <link rel="stylesheet" href="CSS/home.css">
+    <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
+
+    <style>
+    /* the snowing efect on the homepage. */
+	#snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+
+
+
+
+
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #eaeaea;
+    overflow: hidden;
+}
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background: #f5f5f5;
+    box-shadow: 0 30px 50px #dbdbdb;
+}
+
+.container .slide .item{
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px #505050;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.slide .item:nth-child(1),
+.slide .item:nth-child(2){
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.slide .item:nth-child(3){
+    left: 50%;
+}
+.slide .item:nth-child(4){
+    left: calc(50% + 220px);
+}
+.slide .item:nth-child(5){
+    left: calc(50% + 440px);
+}
+
+/* here n = 0, 1, 2, 3,... */
+.slide .item:nth-child(n + 6){
+    left: calc(50% + 660px);
+    opacity: 0;
+}
+
+.main-container {
+    margin-left: 0px;
+    margin-bottom: 100px;
+  }
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fffdfd00;
+    padding: 14px 30px;
+  }
+  .topbar .prev-next-buttons button {
+    color: #ffffff;
+    cursor: not-allowed;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    font-size: 18px;
+    border: 0px;
+    background-color: #53af72;
+    margin-right: 10px;
+  }
+  .topbar .navbar {
+    display: flex;
+    align-items: center;
+  }
+  .topbar .navbar ul {
+    list-style: none;
+  }
+  .topbar .navbar ul li {
+    display: inline-block;
+    margin: 0px 8px;
+    width: 70px;
+  }
+  .topbar .navbar ul li a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .topbar .navbar ul li a:hover,
+  .topbar .navbar ul li a:active,
+  .topbar .navbar ul li a:focus {
+    color: #53af72;
+    font-size: 15px;
+  }
+  .topbar .navbar ul li.divider {
+    color: #53af72;
+    font-size: 26px;
+    margin: 0px 20px;
+    width: auto;
+  }
+  .topbar .navbar button {
+    background-color: #58bf61;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  .topbar .navbar button:hover,
+  .topbar .navbar button:active,
+  .topbar .navbar button:focus {
+    background-color: #f2f2f2;
+  }
+
+.item .content{
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    width: 300px;
+    text-align: left;
+    color: #eee;
+    transform: translate(0, -50%);
+    font-family: system-ui;
+    display: none;
+}
+
+#spotifyButton {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+#spotifyButton img {
+    width: 125px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.slide .item:nth-child(2) .content{
+    display: block;
+}
+
+
+.content .name{
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0;
+    animation: animate 1s ease-in-out 1 forwards;
+}
+
+.content .des{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+}
+
+.content button{
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.6s 1 forwards;
+}
+
+
+@keyframes animate {
+    from{
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+    }
+}
+
+
+
+.button{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+}
+
+.button button{
+    width: 40px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border: 1px solid #000;
+    transition: 0.3s;
+}
+
+.button button:hover{
+    background: #ababab;
+    color: #fff;
+}
+
+button {
+  font-size: 18px;
+  color: #e1e1e1;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+
+button:focus,
+button:hover {
+  color: #fff;
+}
+
+button:focus:after,
+button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+    </style>
+</head>
+
+<body>
+
+    <!--This is the Font Awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <div class="main-container">
+        <div class="topbar">
+          <div class="prev-next-buttons">
+            <button type="button" class="fa fas fa-chevron-left"></button>
+            <button type="button" class="fa fas fa-chevron-right"></button>
+          </div>
+  
+          <div class="navbar">
+            <ul>
+              <li>
+                <a href="#">Premium</a>
+              </li>
+              <li>
+                <a href="#">Support</a>
+              </li>
+              <li>
+                <a href="#">Download</a>
+              </li>
+              <li class="divider">|</li>
+            </ul>
+            <button type="button" id="spotifyButton">
+                <a href="/_posts/spotifyhome.html">
+                    <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Spotify">
+                </a>
+            </button>            
+          </div>
+        </div>
+
+    <div class="container">
+
+        <div class="slide">
+
+            
+            <div class="item" style="background-image: url(https://i.ibb.co/KyY7xdV/Ping-Pong-Game-Cover-Final.png);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">Ping Pong</div>
+                    <div class="des">Game 8 - Ping Pong</div>
+                    <a href="http://127.0.0.1:5502/_posts/pingpong.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/Ky1wRMt/Obstacle-Game-Cover-Final-1.png);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">Obstacle Game</div>
+                    <div class="des">Game 1 - Obstacle Game</div>
+                    <a href="http://127.0.0.1:5502/_posts/obstaclegame.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/6P8tHTS/image.png);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">Crossy Road</div>
+                    <div class="des">Game 2 - Crossy Road</div>
+                    <a href="http://127.0.0.1:5502/_posts/2024-02-15-Crossy_Road.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/vwzHJKt/Eye-Dropper-Cover-Final-1.png);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">Eyedropper</div>
+                    <div class="des">Game 3 - Eyedropper Tool</div>
+                    <a href="http://127.0.0.1:5502/_posts/eyedropper.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/XJGMshD/image.png);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">Drawing Game</div>
+                    <div class="des">Game 4 - Drawing Game</div>
+                    <a href="http://127.0.0.1:5502/_posts/drawinggame.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/D4YMCPd/image.png);"> 
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">2048</div>
+                    <div class="des">Game 5 - 2048 mini game</div>
+                    <a href="http://127.0.0.1:5502/_posts/2048game.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/HBKLryX/image.png);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name">Coin Collector</div>
+                    <div class="des">Game 6 - Coin Collector</div>
+                    <a href="http://127.0.0.1:5502/_posts/2024-02-13-coincollector.html" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(https://i.ibb.co/Bq4Q0M8/img4.jpg);">
+                <!-- change the background image for the game here!!! -->
+                <div class="content">
+                    <div class="name"> type </div>
+                    <div class="des">Game 7 Description</div>
+                    <a href="" target="_blank"><button>Click Here to play</button></a>
+                </div>
+            </div>
+            <!-- if you want to add another game.... just simply copy the format above... -->
+
+        </div>
+
+        <div class="button">
+            <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+    </div>
+
+    <script>
+        let next = document.querySelector('.next')
+        let prev = document.querySelector('.prev')
+
+        next.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').appendChild(items[0])
+    })
+
+        prev.addEventListener('click', function(){
+        let items = document.querySelectorAll('.item')
+        document.querySelector('.slide').prepend(items[items.length - 1]) // here the length of items = 6
+    })
+
+    //The snowy codes here.....
+    document.addEventListener('DOMContentLoaded', function(){
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    script.onload = function(){
+        particlesJS("snow", {
+            "particles": {
+                "number": {
+                    "value": 50,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "opacity": {
+                    "value": 0.7,
+                    "random": false,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 5,
+                    "direction": "bottom",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 300,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": {
+                        "enable": false
+                    },
+                    "onclick": {
+                        "enable": false
+                    },
+                    "resize": false
+                }
+            },
+            "retina_detect": true
+        });
+    }
+    document.head.append(script);
+});
+    </script>
+</body>
+
+</html>
