@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Item Collection Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px; /* Increased max-width */
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            width: calc(50% - 10px); /* Adjusted width */
+            margin-right: 20px; /* Added margin-right */
+        }
+        .grid div {
+            flex: 1 1 calc(20% - 10px);
+            margin: 5px;
+            height: 0;
+            padding-bottom: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            cursor: pointer;
+            box-sizing: border-box;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .inventory {
+            text-align: left;
+            max-width: 200px;
+            flex-direction: column; /* Added */
+        }
+        .inventory .item {
+            margin: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .inventory .item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .buttons button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grid Item Collection Game</h1>
+    <div class="container">
+        <div class="grid" id="grid"></div>
+        <div class="inventory">
+            <h2>Inventory:</h2>
+            <div id="inventory"></div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button onclick="sortInventory('nameAsc')">Sort Inventory by Name (Asc)</button>
+        <button onclick="sortInventory('nameDesc')">Sort Inventory by Name (Desc)</button>
+        <button onclick="sortInventory('frequency')">Sort Inventory by Frequency</button>
+        <button onclick="resetGame()">Reset Game</button>
+    </div>
+    <script>
+        const rows = 5;
+        const cols = 5;
+        const items = ["sword", "shield", "potion", "gold", "helmet", "boots", "enchantedBow", "armor"];
+        const itemImages = {
+            sword: "https://i.ibb.co/WB1Ct5j/image.png",
+            shield: "https://i.ibb.co/P58pYJ1/Shield-JE2-BE1.webp",
+            potion: "https://i.ibb.co/h7YdvY5/Water-Bottle-JE2-BE2.webp",
+            gold: "https://i.ibb.co/LRYfkZs/Gold-Ingot-JE4-BE2.webp",
+            helmet: "https://i.ibb.co/XzHb4CX/Netherite-Helmet-JE2-BE1.webp",
+            boots: "https://i.ibb.co/CbzGzYS/Leather-Boots-29-JE2.webp",
+            enchantedBow: "https://i.ibb.co/M56HKGB/Enchanted-Bow.webp",
+            armor: "https://i.ibb.co/Lr7hSPc/Diamond-Chestplate-JE2.webp",
+            empty: ""
+        };
+        let initialGrid = [];
+        let grid = [];
+        let inventory = [];
+
+        // Initialize grid with random items
+        function initializeGrid() {
+            for (let i = 0; i < rows; i++) {
+                let row = [];
+                for (let j = 0; j < cols; j++) {
+                    row.push(items[Math.floor(Math.random() * items.length)]);
+                }
+                initialGrid.push([...row]);
+                grid.push([...row]);
+            }
+        }
+
+        // Render the grid in the HTML
+        function renderGrid() {
+            const gridElement = document.getElementById("grid");
+            gridElement.innerHTML = "";
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const cell = document.createElement("div");
+                    cell.style.backgroundImage = `url(${itemImages[grid[i][j]]})`;
+                    cell.onclick = () => collectItem(i, j);
+                    gridElement.appendChild(cell);
+                }
+            }
+        }
+
+        // Collect item from the grid
+        function collectItem(row, col) {
+            const item = grid[row][col];
+            if (item !== "empty") {
+                inventory.push(item);
+                grid[row][col] = "empty";
+                renderGrid();
+                renderInventory();
+            }
+        }
+
+        // Render the inventory in the HTML
+        function renderInventory() {
+            const inventoryElement = document.getElementById("inventory");
+            inventoryElement.innerHTML = inventory.map(item => `
+                <div class="item">
+                    <img src="${itemImages[item]}" alt="${item}">
+                    <p>${item}</p>
+                </div>
+            `).join("");
+        }
+
+        // Sort the inventory based on the criteria
+        function sortInventory(criteria) {
+            if (criteria === 'nameAsc') {
+                inventory.sort();
+            } else if (criteria === 'nameDesc') {
+                inventory.sort().reverse();
+            } else if (criteria === 'frequency') {
+                const frequencyMap = inventory.reduce((acc, item) => {
+                    acc[item] = (acc[item] || 0) + 1;
+                    return acc;
+                }, {});
+                inventory.sort((a, b) => frequencyMap[b] - frequencyMap[a] || a.localeCompare(b));
+            }
+            renderInventory();
+        }
+
+        // Reset the game
+        function resetGame() {
+            inventory = [];
+            grid = initialGrid.map(row => [...row]);
+            renderGrid();
+            renderInventory();
+        }
+
+        // Initialize and render the game grid and inventory
+        initializeGrid();
+        renderGrid();
+        renderInventory();
+    </script>
+</body>
+</html>
