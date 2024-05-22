@@ -15,17 +15,20 @@
         }
         .container {
             display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            width: 100%;
-            max-width: 1200px; /* Increased max-width */
-            margin-bottom: 20px;
+            width: 80%;
+            max-width: 1200px;
+            justify-content: space-between;
+        }
+        .grid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .grid {
             display: flex;
             flex-wrap: wrap;
-            width: calc(50% - 10px); /* Adjusted width */
-            margin-right: 20px; /* Added margin-right */
+            width: 300px;
+            margin-bottom: 20px;
         }
         .grid div {
             flex: 1 1 calc(20% - 10px);
@@ -42,51 +45,141 @@
             background-repeat: no-repeat;
             background-position: center;
         }
+        .inventory-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .inventory {
-            text-align: left;
-            max-width: 200px;
-            flex-direction: column; /* Added */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 300px;
+            margin-bottom: 20px;
         }
         .inventory .item {
-            margin: 5px;
-            display: flex;
-            align-items: center;
+            width: 90px;
+            text-align: center;
         }
         .inventory .item img {
             width: 50px;
             height: 50px;
-            margin-right: 10px;
         }
         .buttons {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
+            margin-top: 20px;
         }
         .buttons button {
             margin: 5px;
+        }
+        .switch-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .switch {
+            font-size: 17px;
+            position: relative;
+            display: inline-block;
+            width: 4em;
+            height: 2em;
+        }
+        .switch input {
+            opacity: 1;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+        .off {
+            position: absolute;
+            content: "";
+            height: 2em;
+            width: 2em;
+            background-color: white;
+            transition: .4s;
+            image-rendering: pixelated;
+            opacity: 1;
+        }
+        .on {
+            position: absolute;
+            content: "";
+            height: 2em;
+            width: 2em;
+            background-color: white;
+            transition: .4s;
+            image-rendering: pixelated;
+            opacity: 0;
+        }
+        .switch input:checked + .slider {
+            background-color: #ccc;
+        }
+        .switch input:focus + .slider {
+            box-shadow: 0 0 1px #ccc;
+        }
+        .switch input:checked ~ .off {
+            transform: translateX(2em);
+        }
+        .switch input:checked ~ .on {
+            transform: translateX(2em);
+            opacity: 1;
+        }
+        @keyframes wander {
+            0% { top: 10%; left: 10%; }
+            25% { top: 10%; left: 90%; }
+            50% { top: 90%; left: 90%; }
+            75% { top: 90%; left: 10%; }
+            100% { top: 10%; left: 10%; }
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
         }
     </style>
 </head>
 <body>
     <h1>Grid Item Collection Game</h1>
+    <div class="switch-container">
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACMQAAEDAwQDAQEAAAAAAAAAAAQBAgUDESEAEjFBBlFhMkL/xAAUAQEAAAAAAAAAAAAAAAAAAAAF/8QAGBEAAwEBAAAAAAAAAAAAAAAAABIiMUH/2gAMAwEAAhEDEQA/AM+Bg4mS8coRccMOdNG01qVyH/kRvHPKKmMdr8uujPwUTG+NkRpw1AKWCbvHKa2zTGphc9u9p0q+rLqeMl4kSCGkYgtoE0HTahIz3bWGNanPrdyqWzn7p5ibh5CArnyZNMyVLpK0QSkt2BNXtVX+7ol1wuLJiyaHt+6Kyp//2Q==" class="off">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACMQAAEDAwQDAQEAAAAAAAAAAAQBAgUDESEAEjFBBlFhMkL/xAAUAQEAAAAAAAAAAAAAAAAAAAAF/8QAGBEAAwEBAAAAAAAAAAAAAAAAABIiMUH/2gAMAwEAAhEDEQA/AM+Bg4mS8coRccMOdNG01qVyH/kRvHPKKmMdr8uujPwUTG+NkRpw1AKWCbvHKa2zTGphc9u9p0q+rLqeMl4kSCGkYgtoE0HTahIz3bWGNanPrdyqWzn7p5ibh5CArnyZNMyVLpK0QSkt2BNXtVX+7ol1wuLJiyaHt+6Kyp//2Q==" class="on">
+        </label>
+    </div>
     <div class="container">
-        <div class="grid" id="grid"></div>
-        <div class="inventory">
+        <div class="grid-container">
+            <div class="grid" id="grid"></div>
+        </div>
+        <div class="inventory-container">
             <h2>Inventory:</h2>
-            <div id="inventory"></div>
+            <div class="inventory" id="inventory"></div>
+            <div class="buttons">
+                <button onclick="sortInventory('nameAsc')">Sort Inventory by Name (Asc)</button>
+                <button onclick="sortInventory('nameDesc')">Sort Inventory by Name (Desc)</button>
+                <button onclick="sortInventory('frequency')">Sort Inventory by Frequency</button>
+                <button onclick="resetGame()">Reset Game</button>
+            </div>
         </div>
     </div>
-    <div class="buttons">
-        <button onclick="sortInventory('nameAsc')">Sort Inventory by Name (Asc)</button>
-        <button onclick="sortInventory('nameDesc')">Sort Inventory by Name (Desc)</button>
-        <button onclick="sortInventory('frequency')">Sort Inventory by Frequency</button>
-        <button onclick="resetGame()">Reset Game</button>
-    </div>
+
+
+
     <script>
         const rows = 5;
         const cols = 5;
-        const items = ["sword", "shield", "potion", "gold", "helmet", "boots", "enchantedBow", "armor"];
+        const items = ["sword", "shield", "potion", "gold", "helmet", "boots", "Bow", "armor"];
         const itemImages = {
             sword: "https://i.ibb.co/WB1Ct5j/image.png",
             shield: "https://i.ibb.co/P58pYJ1/Shield-JE2-BE1.webp",
@@ -94,14 +187,14 @@
             gold: "https://i.ibb.co/LRYfkZs/Gold-Ingot-JE4-BE2.webp",
             helmet: "https://i.ibb.co/XzHb4CX/Netherite-Helmet-JE2-BE1.webp",
             boots: "https://i.ibb.co/CbzGzYS/Leather-Boots-29-JE2.webp",
-            enchantedBow: "https://i.ibb.co/M56HKGB/Enchanted-Bow.webp",
+            Bow: "https://i.ibb.co/M56HKGB/Enchanted-Bow.webp",
             armor: "https://i.ibb.co/Lr7hSPc/Diamond-Chestplate-JE2.webp",
             empty: ""
         };
         let initialGrid = [];
         let grid = [];
         let inventory = [];
-
+        
         // Initialize grid with random items
         function initializeGrid() {
             for (let i = 0; i < rows; i++) {
@@ -113,7 +206,7 @@
                 grid.push([...row]);
             }
         }
-
+        
         // Render the grid in the HTML
         function renderGrid() {
             const gridElement = document.getElementById("grid");
@@ -127,7 +220,7 @@
                 }
             }
         }
-
+        
         // Collect item from the grid
         function collectItem(row, col) {
             const item = grid[row][col];
@@ -138,7 +231,7 @@
                 renderInventory();
             }
         }
-
+        
         // Render the inventory in the HTML
         function renderInventory() {
             const inventoryElement = document.getElementById("inventory");
@@ -149,23 +242,35 @@
                 </div>
             `).join("");
         }
-
+        
         // Sort the inventory based on the criteria
         function sortInventory(criteria) {
             if (criteria === 'nameAsc') {
-                inventory.sort();
+                inventory = manualSort(inventory, (a, b) => a.localeCompare(b));
             } else if (criteria === 'nameDesc') {
-                inventory.sort().reverse();
+                inventory = manualSort(inventory, (a, b) => b.localeCompare(a));
             } else if (criteria === 'frequency') {
                 const frequencyMap = inventory.reduce((acc, item) => {
                     acc[item] = (acc[item] || 0) + 1;
                     return acc;
                 }, {});
-                inventory.sort((a, b) => frequencyMap[b] - frequencyMap[a] || a.localeCompare(b));
+                inventory = manualSort(inventory, (a, b) => frequencyMap[b] - frequencyMap[a] || a.localeCompare(b));
             }
             renderInventory();
         }
-
+        
+        // Manual sort function
+        function manualSort(arr, compare) {
+            for (let i = 0; i < arr.length - 1; i++) {
+                for (let j = 0; j < arr.length - 1 - i; j++) {
+                    if (compare(arr[j], arr[j + 1]) > 0) {
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                    }
+                }
+            }
+            return arr;
+        }
+        
         // Reset the game
         function resetGame() {
             inventory = [];
@@ -173,11 +278,14 @@
             renderGrid();
             renderInventory();
         }
-
+        
         // Initialize and render the game grid and inventory
         initializeGrid();
         renderGrid();
         renderInventory();
+
+
+
     </script>
 </body>
 </html>
