@@ -3,183 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid Item Collection Game</title>
+    <title>Combined Minecraft Game</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            width: 80%;
-            max-width: 1200px;
-            justify-content: space-between;
-        }
-        .grid-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            width: 300px;
-            margin-bottom: 20px;
-        }
-        .grid div {
-            flex: 1 1 calc(20% - 10px);
-            margin: 5px;
-            height: 0;
-            padding-bottom: 20%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #000;
-            cursor: pointer;
-            box-sizing: border-box;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-        .inventory-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .inventory {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-width: 300px;
-            margin-bottom: 20px;
-        }
-        .inventory .item {
-            width: 90px;
-            text-align: center;
-        }
-        .inventory .item img {
-            width: 50px;
-            height: 50px;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .buttons button {
-            margin: 5px;
-        }
-        .switch-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-        }
-        .switch {
-            font-size: 17px;
-            position: relative;
-            display: inline-block;
-            width: 4em;
-            height: 2em;
-        }
-        .switch input {
-            opacity: 1;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-        }
-        .off {
-            position: absolute;
-            content: "";
-            height: 2em;
-            width: 2em;
-            background-color: white;
-            transition: .4s;
-            image-rendering: pixelated;
-            opacity: 1;
-        }
-        .on {
-            position: absolute;
-            content: "";
-            height: 2em;
-            width: 2em;
-            background-color: white;
-            transition: .4s;
-            image-rendering: pixelated;
-            opacity: 0;
-        }
-        .switch input:checked + .slider {
-            background-color: #ccc;
-        }
-        .switch input:focus + .slider {
-            box-shadow: 0 0 1px #ccc;
-        }
-        .switch input:checked ~ .off {
-            transform: translateX(2em);
-        }
-        .switch input:checked ~ .on {
-            transform: translateX(2em);
-            opacity: 1;
-        }
-        @keyframes wander {
-            0% { top: 10%; left: 10%; }
-            25% { top: 10%; left: 90%; }
-            50% { top: 90%; left: 90%; }
-            75% { top: 90%; left: 10%; }
-            100% { top: 10%; left: 10%; }
-        }
-        @keyframes explode {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(5); opacity: 0; }
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+#main-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#game-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#inventory-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+#grid div {
+    flex: 1 1 calc(20% - 10px);
+    margin: 5px;
+    padding-bottom: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+#grid div:hover {
+    transform: scale(1.05);
+}
+#gameCanvas {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #87CEEB;
+}
+#inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#inventory .item {
+    display: inline-block;
+    margin: 10px;
+}
+#inventory .item img {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+#inventory .item p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    text-align: center;
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    color: #0f1923;
+    cursor: pointer;
+    position: relative;
+    padding: 8px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all .15s ease;
+}
+
+.button::before,
+.button::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: calc(50% - 5px);
+    border: 1px solid #7D8082;
+    transition: all .15s ease;
+}
+
+.button::before {
+    top: 0;
+    border-bottom-width: 0;
+}
+
+.button::after {
+    bottom: 0;
+    border-top-width: 0;
+}
+
+.button:active,
+.button:focus {
+    outline: none;
+}
+
+.button:active::before,
+.button:active::after {
+    right: 3px;
+    left: 3px;
+}
+
+.button:active::before {
+    top: 3px;
+}
+
+.button:active::after {
+    bottom: 3px;
+}
+
+.button_lg {
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #0f1923;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.button_lg::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background-color: #0f1923;
+}
+
+.button_lg::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #0f1923;
+    transition: all .2s ease;
+}
+
+.button_sl {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: -8px;
+    width: 0;
+    background-color: #ff4655;
+    transform: skew(-15deg);
+    transition: all .2s ease;
+}
+
+.button_text {
+    position: relative;
+}
+
+.button:hover {
+    color: #0f1923;
+}
+
+.button:hover .button_sl {
+    width: calc(100% + 15px);
+}
+
+.button:hover .button_lg::after {
+    background-color: #fff;
+}
     </style>
 </head>
 <body>
-    <h1>Grid Item Collection Game</h1>
-    <div class="switch-container">
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACMQAAEDAwQDAQEAAAAAAAAAAAQBAgUDESEAEjFBBlFhMkL/xAAUAQEAAAAAAAAAAAAAAAAAAAAF/8QAGBEAAwEBAAAAAAAAAAAAAAAAABIiMUH/2gAMAwEAAhEDEQA/AM+Bg4mS8coRccMOdNG01qVyH/kRvHPKKmMdr8uujPwUTG+NkRpw1AKWCbvHKa2zTGphc9u9p0q+rLqeMl4kSCGkYgtoE0HTahIz3bWGNanPrdyqWzn7p5ibh5CArnyZNMyVLpK0QSkt2BNXtVX+7ol1wuLJiyaHt+6Kyp//2Q==" class="off">
-            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACMQAAEDAwQDAQEAAAAAAAAAAAQBAgUDESEAEjFBBlFhMkL/xAAUAQEAAAAAAAAAAAAAAAAAAAAF/8QAGBEAAwEBAAAAAAAAAAAAAAAAABIiMUH/2gAMAwEAAhEDEQA/AM+Bg4mS8coRccMOdNG01qVyH/kRvHPKKmMdr8uujPwUTG+NkRpw1AKWCbvHKa2zTGphc9u9p0q+rLqeMl4kSCGkYgtoE0HTahIz3bWGNanPrdyqWzn7p5ibh5CArnyZNMyVLpK0QSkt2BNXtVX+7ol1wuLJiyaHt+6Kyp//2Q==" class="on">
-        </label>
-    </div>
-    <div class="container">
-        <div class="grid-container">
+    <h1>Minecraft Game</h1>
+
+    <div id="main-container">
+        <!-- Minecraft Platformer Game -->
+        <div id="game-container">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+
+        <!-- Inventory Part -->
+        <div id="inventory-container">
             <div class="grid" id="grid"></div>
-        </div>
-        <div class="inventory-container">
-            <h2>Inventory:</h2>
-            <div class="inventory" id="inventory"></div>
             <div class="buttons">
-                <button onclick="sortInventory('nameAsc')">Sort Inventory by Name (Asc)</button>
-                <button onclick="sortInventory('nameDesc')">Sort Inventory by Name (Desc)</button>
-                <button onclick="sortInventory('frequency')">Sort Inventory by Frequency</button>
-                <button onclick="resetGame()">Reset Game</button>
+                <button class="button" onclick="sortInventory('nameAsc')">
+                    <span class="button_lg">
+                        <span class="button_sl"></span>
+                        <span class="button_text">Sort by Name (Asc)</span>
+                    </span>
+                </button>
+                <button class="button" onclick="sortInventory('nameDesc')">
+                    <span class="button_lg">
+                        <span class="button_sl"></span>
+                        <span class="button_text">Sort by Name (Desc)</span>
+                    </span>
+                </button>
+                <button class="button" onclick="sortInventory('frequency')">
+                    <span class="button_lg">
+                        <span class="button_sl"></span>
+                        <span class="button_text">Sort by Frequency</span>
+                    </span>
+                </button>
+                <button class="button" onclick="resetGame()">
+                    <span class="button_lg">
+                        <span class="button_sl"></span>
+                        <span class="button_text">Reset Game</span>
+                    </span>
+                </button>
             </div>
+            <div id="inventory"></div>
         </div>
     </div>
-
-
 
     <script>
+        // Inventory Game Script
         const rows = 5;
         const cols = 5;
-        const items = ["sword", "shield", "potion", "gold", "helmet", "boots", "Bow", "armor"];
+        const items = ["sword", "shield", "potion", "gold", "helmet", "boots", "enchantedBow", "chestplate"];
         const itemImages = {
             sword: "https://i.ibb.co/WB1Ct5j/image.png",
             shield: "https://i.ibb.co/P58pYJ1/Shield-JE2-BE1.webp",
@@ -187,15 +263,14 @@
             gold: "https://i.ibb.co/LRYfkZs/Gold-Ingot-JE4-BE2.webp",
             helmet: "https://i.ibb.co/XzHb4CX/Netherite-Helmet-JE2-BE1.webp",
             boots: "https://i.ibb.co/CbzGzYS/Leather-Boots-29-JE2.webp",
-            Bow: "https://i.ibb.co/M56HKGB/Enchanted-Bow.webp",
-            armor: "https://i.ibb.co/Lr7hSPc/Diamond-Chestplate-JE2.webp",
+            enchantedBow: "https://i.ibb.co/M56HKGB/Enchanted-Bow.webp",
+            chestplate: "https://i.ibb.co/Lr7hSPc/Diamond-Chestplate-JE2.webp",
             empty: ""
         };
         let initialGrid = [];
         let grid = [];
         let inventory = [];
-        
-        // Initialize grid with random items
+
         function initializeGrid() {
             for (let i = 0; i < rows; i++) {
                 let row = [];
@@ -206,8 +281,7 @@
                 grid.push([...row]);
             }
         }
-        
-        // Render the grid in the HTML
+
         function renderGrid() {
             const gridElement = document.getElementById("grid");
             gridElement.innerHTML = "";
@@ -220,8 +294,7 @@
                 }
             }
         }
-        
-        // Collect item from the grid
+
         function collectItem(row, col) {
             const item = grid[row][col];
             if (item !== "empty") {
@@ -231,8 +304,7 @@
                 renderInventory();
             }
         }
-        
-        // Render the inventory in the HTML
+
         function renderInventory() {
             const inventoryElement = document.getElementById("inventory");
             inventoryElement.innerHTML = inventory.map(item => `
@@ -242,8 +314,7 @@
                 </div>
             `).join("");
         }
-        
-        // Sort the inventory based on the criteria
+
         function sortInventory(criteria) {
             if (criteria === 'nameAsc') {
                 inventory = manualSort(inventory, (a, b) => a.localeCompare(b));
@@ -258,8 +329,7 @@
             }
             renderInventory();
         }
-        
-        // Manual sort function
+
         function manualSort(arr, compare) {
             for (let i = 0; i < arr.length - 1; i++) {
                 for (let j = 0; j < arr.length - 1 - i; j++) {
@@ -270,22 +340,173 @@
             }
             return arr;
         }
-        
-        // Reset the game
+
         function resetGame() {
             inventory = [];
             grid = initialGrid.map(row => [...row]);
             renderGrid();
             renderInventory();
         }
-        
-        // Initialize and render the game grid and inventory
+
         initializeGrid();
         renderGrid();
         renderInventory();
 
+        // Platformer Game Script
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
 
+        canvas.width = 800;
+        canvas.height = 400;
 
+        const worldWidth = 7000;
+        const skyColor = '#87CEEB';
+        const groundHeight = 50;
+        const groundColor = '#8B4513';
+        const steveWidth = 50;
+        const steveHeight = 100;
+        let steveX = 100;
+        let steveY = canvas.height - groundHeight - steveHeight;
+        const steveSpeed = 5;
+        const jumpHeight = 15;
+        let velocityY = 0;
+        let isGrounded = true;
+
+        const steveImage = new Image();
+        steveImage.src = 'https://i.ibb.co/0Gm8Hvm/image.png';
+
+        const platforms = [
+            { x: 200, y: canvas.height - groundHeight - 100, width: 100, height: 10 },
+            { x: 400, y: canvas.height - groundHeight - 150, width: 100, height: 10 },
+            { x: 800, y: canvas.height - groundHeight - 50, width: 100, height: 10 },
+            { x: 1200, y: canvas.height - groundHeight - 150, width: 100, height: 10 },
+            { x: 1500, y: canvas.height - groundHeight - 100, width: 100, height: 10 },
+            { x: 1800, y: canvas.height - groundHeight - 200, width: 100, height: 10 }
+        ];
+
+        const treeTrunkColor = '#8B4513';
+        const treeFoliageColor = '#228B22';
+        const trees = [
+            { x: 700, height: 120 },
+            { x: 1300, height: 100 },
+            { x: 1600, height: 150 },
+            { x: 1900, height: 120 }
+        ];
+
+        let viewportX = 0;
+
+        function drawBackground() {
+            ctx.fillStyle = skyColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawGround() {
+            ctx.fillStyle = groundColor;
+            ctx.fillRect(-viewportX, canvas.height - groundHeight, worldWidth, groundHeight);
+        }
+
+        function drawSteve() {
+            ctx.drawImage(steveImage, steveX - viewportX, steveY, steveWidth, steveHeight);
+        }
+
+        function drawPlatforms() {
+            ctx.fillStyle = '#8B4513';
+            platforms.forEach(platform => {
+                ctx.fillRect(platform.x - viewportX, platform.y, platform.width, platform.height);
+            });
+        }
+
+        function drawTrees() {
+            trees.forEach(tree => {
+                ctx.fillStyle = treeTrunkColor;
+                ctx.fillRect(tree.x - viewportX, canvas.height - groundHeight - tree.height, 20, tree.height);
+
+                ctx.fillStyle = treeFoliageColor;
+                ctx.fillRect(tree.x - 20 - viewportX, canvas.height - groundHeight - tree.height - 100, 60, 100);
+            });
+        }
+
+        function checkPlatformCollision() {
+            isGrounded = false;
+            platforms.forEach(platform => {
+                if (
+                    steveX < platform.x + platform.width &&
+                    steveX + steveWidth > platform.x &&
+                    steveY + steveHeight <= platform.y + platform.height &&
+                    steveY + steveHeight + velocityY >= platform.y
+                ) {
+                    steveY = platform.y - steveHeight;
+                    isGrounded = true;
+                    velocityY = 0;
+                }
+            });
+            return isGrounded;
+        }
+
+        function drawEnding() {
+            if (steveX >= 7000) {
+                ctx.font = '48px serif';
+                ctx.fillStyle = 'red';
+                ctx.fillText('End', 7000 - viewportX, canvas.height / 2);
+            }
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawBackground();
+            drawTrees();
+            drawGround();
+            drawPlatforms();
+            drawSteve();
+            drawEnding();
+
+            if (keys['ArrowLeft']) {
+                steveX -= steveSpeed;
+            }
+            if (keys['ArrowRight']) {
+                steveX += steveSpeed;
+            }
+
+            if (!isGrounded) {
+                steveY += velocityY;
+                velocityY += 1;
+            }
+
+            if (!checkPlatformCollision()) {
+                isGrounded = false;
+            }
+
+            if (steveX > canvas.width / 2) {
+                viewportX = steveX - canvas.width / 2;
+            }
+
+            if (steveY + steveHeight >= canvas.height - groundHeight) {
+                steveY = canvas.height - groundHeight - steveHeight;
+                velocityY = 0;
+                isGrounded = true;
+            }
+        }
+
+        const keys = {};
+        window.addEventListener('keydown', function(event) {
+            keys[event.key] = true;
+            if (event.key === 'ArrowUp' && isGrounded) {
+                velocityY = -jumpHeight;
+                isGrounded = false;
+            }
+        });
+
+        window.addEventListener('keyup', function(event) {
+            keys[event.key] = false;
+        });
+
+        function gameLoop() {
+            update();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
     </script>
 </body>
 </html>
